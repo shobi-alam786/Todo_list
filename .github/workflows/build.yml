@@ -24,12 +24,11 @@ jobs:
           git clone https://github.com/flutter/flutter.git --depth 1 -b stable ~/flutter
           echo "$HOME/flutter/bin" >> $GITHUB_PATH
 
-      - name: Flutter version
-        run: flutter --version
-
-      - name: Update Kotlin version
+      - name: Create Flutter project
         run: |
-          sed -i 's/ext.kotlin_version.*/ext.kotlin_version = "1.9.10"/' android/build.gradle
+          flutter create --project-name todo_list tmp_project
+          cp -r tmp_project/android ./android
+          rm -rf tmp_project
 
       - name: Get dependencies
         run: flutter pub get
