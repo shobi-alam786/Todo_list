@@ -1,4 +1,3 @@
-
 name: Build APK
 
 on:
@@ -29,6 +28,11 @@ jobs:
 
       - name: Get dependencies
         run: flutter pub get
+
+      - name: Regenerate Android Gradle project
+        run: |
+          rm -rf android/
+          flutter create --platforms=android -t app .
 
       - name: Build APK
         run: flutter build apk --release --no-tree-shake-icons
